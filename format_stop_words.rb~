@@ -1,0 +1,47 @@
+#!/usr/bin/ruby
+require 'scanf.rb'
+
+class Dict
+   attr_accessor :htable
+   def initialize
+     name = "./htable_stop_words"
+     if !File.exists? name
+       @htable = build_table
+       File.open(name, "w") {|file| Marshal.dump(@htable, file)}
+     else
+       File.open(name) {|file| Marshal.load(name)}
+     end
+   end
+
+
+def build_table
+
+fp = File.open("stopwords.txt", "r");
+data = fp.readlines;
+h = Hash.new
+
+data.each do |line|
+	next if line.nil?
+	words = line.split(",")
+	i = 0
+	while (i < words.length)
+		str = words[i]
+		h[str] = 1
+		puts words[i]
+		i += 1
+	end
+end
+return h
+
+
+end
+end
+
+
+
+#main
+if __FILE__ == $0
+  d = Dict.new
+  puts d.htable
+end
+
