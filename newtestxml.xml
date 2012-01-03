@@ -1,0 +1,66 @@
+<synset id="n00003553" ofs="00003553" pos="n">
+  <terms>
+   <term>whole</term>
+   <term>unit</term>
+  </terms>
+  <keys>
+   <sk>whole%1:03:00::</sk>
+   <sk>unit%1:03:00::</sk>
+  </keys>
+  <gloss desc="orig">
+   <orig>an assemblage of parts that is regarded as a single entity; "how big is that part compared to the whole?"; "the team is a unit"</orig>
+  </gloss>
+  <gloss desc="text">
+   <text>an assemblage of parts that is regarded as a single entity ; â how big is that part compared to the whole ? â ; â the team is a unit â</text>
+  </gloss>
+  <gloss desc="wsd">
+   <def id="n00003553_d">
+    <wf id="n00003553_wf1" lemma="an" pos="DT" tag="ignore">an</wf>
+    <wf id="n00003553_wf2" lemma="assemblage%1" pos="NN" tag="man">
+     <id id="n00003553_id.4" lemma="assemblage" sk="assemblage%1:14:01::"/>assemblage</wf>
+    <wf id="n00003553_wf3" lemma="of" pos="IN" tag="ignore">of</wf>
+    <wf id="n00003553_wf4" lemma="part%1|parts%1|part%2" pos="NNS" tag="un">parts</wf>
+    <wf id="n00003553_wf5" lemma="that" pos="WDT" tag="ignore">that</wf>
+    <wf id="n00003553_wf6" lemma="i%1|be%2" pos="VBZ" tag="un">is</wf>
+    <cf coll="a" id="n00003553_wf7" lemma="regard%2" pos="VBN" tag="un">
+     <glob coll="a" glob="man" id="n00003553_coll.a" lemma="regard_as%2" tag="man">
+      <id coll="a" id="n00003553_id.5" lemma="regard as" sk="regard_as%2:31:00::"/>
+    </glob>regarded</cf>
+    <cf coll="a" id="n00003553_wf8" lemma="as" pos="IN" tag="ignore">as</cf>
+    <wf id="n00003553_wf9" lemma="a" pos="DT" tag="ignore">a</wf>
+    <wf id="n00003553_wf10" lemma="single%1|single%2|single%3" pos="JJ" tag="un">single</wf>
+    <wf id="n00003553_wf11" lemma="entity%1" pos="NN" sep="" tag="auto">
+     <id id="n00003553_id.1" lemma="entity" sk="entity%1:03:00::"/>entity</wf>
+    <wf id="n00003553_wf12" pos=":" tag="ignore" type="punc">;</wf>
+   </def>
+   <ex id="n00003553_ex1">
+    <qf rend="dq">
+     <wf id="n00003553_wf13" lemma="how" tag="ignore">how</wf>
+     <wf id="n00003553_wf14" lemma="big%3|big%4" tag="un">big</wf>
+     <wf id="n00003553_wf15" lemma="i%1|be%2" tag="un">is</wf>
+     <wf id="n00003553_wf16" lemma="that" tag="ignore">that</wf>
+     <wf id="n00003553_wf17" lemma="part%1|part%2|part%4" tag="un">part</wf>
+     <wf id="n00003553_wf18" lemma="compare%2" tag="un">compared</wf>
+     <wf id="n00003553_wf19" lemma="to" tag="ignore">to</wf>
+     <wf id="n00003553_wf20" lemma="the" tag="ignore">the</wf>
+     <wf id="n00003553_wf21" lemma="whole%1|whole%3|whole%4" sep="" tag="auto">
+      <id id="n00003553_id.2" lemma="whole" sk="whole%1:03:00::"/>whole</wf>
+     <wf id="n00003553_wf22" sep="" tag="ignore" type="punc">?</wf>
+    </qf>
+    <wf id="n00003553_wf23" tag="ignore" type="punc">;</wf>
+   </ex>
+   <ex id="n00003553_ex2">
+    <qf rend="dq">
+     <wf id="n00003553_wf24" lemma="the" tag="ignore">the</wf>
+     <wf id="n00003553_wf25" lemma="team%1|team%2" tag="un">team</wf>
+     <wf id="n00003553_wf26" lemma="i%1|be%2" tag="un">is</wf>
+     <wf id="n00003553_wf27" lemma="a" tag="ignore">a</wf>
+     <wf id="n00003553_wf28" lemma="unit%1" sep="" tag="auto">
+      <id id="n00003553_id.3" lemma="unit" sk="unit%1:03:00::"/>unit</wf>
+    </qf>
+    <wf id="n00003553_wf29" tag="ignore" type="punc">;</wf>
+   </ex>
+  </gloss>
+ </synset>
+
+

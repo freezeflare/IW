@@ -1,0 +1,48 @@
+ <synset id="n00001740" ofs="00001740" pos="n">
+  <terms>
+   <term>entity</term>
+  </terms>
+  <keys>
+   <sk>entity%1:03:00::</sk>
+  </keys>
+  <gloss desc="orig">
+   <orig>that which is perceived or known or inferred to have its own distinct existence (living or nonliving)</orig>
+  </gloss>
+  <gloss desc="text">
+   <text>that which is perceived or known or inferred to have its own distinct existence ( living or nonliving )</text>
+  </gloss>
+  <gloss desc="wsd">
+   <def id="n00001740_d">
+    <wf id="n00001740_wf1" lemma="that" pos="PRP" tag="ignore">that</wf>
+    <wf id="n00001740_wf2" lemma="which" pos="WDT" tag="ignore">which</wf>
+    <wf id="n00001740_wf3" lemma="i%1|be%2" pos="VBZ" tag="un">is</wf>
+    <wf id="n00001740_wf4" lemma="perceive%2|perceived%3" pos="VBN" tag="man">
+     <id id="n00001740_id.6" lemma="perceive" sk="perceive%2:31:00::"/>perceived</wf>
+    <wf id="n00001740_wf5" lemma="or" pos="CC" tag="ignore">or</wf>
+    <wf id="n00001740_wf6" lemma="know%2|known%3" pos="VBN" tag="man">
+     <id id="n00001740_id.3" lemma="known" sk="known%3:00:00::"/>known</wf>
+    <wf id="n00001740_wf7" lemma="or" pos="CC" tag="ignore">or</wf>
+    <wf id="n00001740_wf8" lemma="infer%2" pos="VBN" tag="man">
+     <id id="n00001740_id.9" lemma="infer" sk="infer%2:31:01::"/>
+     <id id="n00001740_id.8" lemma="infer" sk="infer%2:31:00::"/>
+     <id id="n00001740_id.7" lemma="infer" sk="infer%2:32:00::"/>inferred</wf>
+    <wf id="n00001740_wf9" lemma="to" pos="TO" tag="ignore">to</wf>
+    <wf id="n00001740_wf10" lemma="have%1|have%2" pos="VB" tag="un">have</wf>
+    <wf id="n00001740_wf11" lemma="its" pos="PRP$" tag="ignore">its</wf>
+    <wf id="n00001740_wf12" lemma="own%2|own%3" pos="JJ" tag="un">own</wf>
+    <wf id="n00001740_wf13" lemma="distinct%3" pos="JJ" tag="man">
+     <id id="n00001740_id.4" lemma="distinct" sk="distinct%3:00:00:separate:00"/>
+     <id id="n00001740_id.2" lemma="distinct" sk="distinct%3:00:00:clear:00"/>distinct</wf>
+    <wf id="n00001740_wf14" lemma="existence%1" pos="NN" tag="man">
+     <id id="n00001740_id.5" lemma="existence" sk="existence%1:26:00::"/>existence</wf>
+    <wf id="n00001740_wf15" pos="(" sep="" tag="ignore" type="punc">(</wf>
+    <wf id="n00001740_wf16" lemma="living%1|live%2|living%3" pos="JJ" tag="un">living</wf>
+    <wf id="n00001740_wf17" lemma="or" pos="CC" tag="ignore">or</wf>
+    <wf id="n00001740_wf18" lemma="nonliving%3" pos="JJ" sep="" tag="auto">
+     <id id="n00001740_id.1" lemma="nonliving" sk="nonliving%3:00:00::"/>nonliving</wf>
+    <wf id="n00001740_wf19" pos=")" sep="" tag="ignore" type="punc">)</wf>
+    <wf id="n00001740_wf20" pos=":" tag="ignore" type="punc">;</wf>
+   </def>
+  </gloss>
+ </synset>
+

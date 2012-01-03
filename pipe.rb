@@ -1,0 +1,8 @@
+#!/usr/bin/ruby
+
+IO.popen("python lemma.py", "r+") do |pipe|
+	pipe.write "cars"
+	pipe.close_write
+	result = pipe.read
+	print result
+end

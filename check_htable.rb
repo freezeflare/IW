@@ -1,0 +1,13 @@
+#!/usr/bin/ruby
+require 'pp'
+
+f = File.open("tagged_corpus")
+
+a = Marshal.load(f)
+
+dir_name = "/media/mynewdrive/txt"
+
+#Dir.foreach(dir_name) do |file|
+#	puts file
+#end
+pp a
