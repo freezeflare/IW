@@ -16,9 +16,9 @@ class Dict
 
 def build_table
 
-fp = File.open("./gloss-tag/WordNet-3.0/glosstag/standoff/index.bysk.tab", "r");
+fp = File.open("./untagged_list", "r");
 #data = fp.readlines;
-h = Hash.new
+
 
 fp.each do |line|
 	next if line.nil?

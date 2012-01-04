@@ -23,8 +23,8 @@ h = Hash.new
 fp.each do |line|
 	next if line.nil?
 	word_with_stuff = line.split(" ")
-	puts ("w/ stuff")
-	pp word_with_stuff
+	#puts ("w/ stuff")
+	#pp word_with_stuff
 	word_with_per = word_with_stuff[0].split(":")[0]
 	word = word_with_per.split("%")[0]
 	
@@ -44,6 +44,6 @@ end
 #main
 if __FILE__ == $0
   d = Dict.new
-  #pp d.htable
+  pp d.htable
 end
 

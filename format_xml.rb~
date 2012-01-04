@@ -5,12 +5,12 @@ class Dict
    attr_accessor :htable
    def initialize
      name = "./htable_xml"
-     if !File.exists? name
+     #if !File.exists? name
        @htable = build_table
-       File.open(name, "w") {|file| Marshal.dump(@htable, file)}
-     else
-       File.open(name) {|file| Marshal.load(file)}
-     end
+       File.open(name, "w+") {|file| Marshal.dump(@htable, file)}
+     #else
+     #  File.open(name) {|file| Marshal.load(file)}
+     #end
    #endh = Hash.new
 	end
 
@@ -21,12 +21,15 @@ sw = File.open("./htable_stop_words", "r");
 
 stop_list = Marshal.load(sw)
 h = Hash.new
+gloss_to_sensekey = Hash.new
+
 #un_tagged = Hash.new
 #name = "/media/mynewdrive/untagged_list"
 name = "./untagged_list"
-uf = File.open(name, "w")
+uf = File.open(name, "w+")
 #puts "here"
 Dir.foreach(dir_name) do |file|
+	#puts file
 	fp = File.open(dir_name+"/"+file, "r");
 	next if File.directory?(fp)
 
@@ -43,11 +46,15 @@ Dir.foreach(dir_name) do |file|
 	un_tag = Array.new
 	glose_done = FALSE
 	gloss = ""
-	gloss_to_sensekey = Hash.new
 
 	fp.each do |line|
 		next if line.nil?
 		words = line.split(" ")
+
+		test_line = line.split(">")
+		if (test_line[0] == "<sk")
+			puts line
+		end
 		#puts words[0]
 	
 		#start of synset
@@ -61,20 +68,42 @@ Dir.foreach(dir_name) do |file|
 			gloss_done = FALSE
 			next
 		end
-	
+		
+		#test_line = line.gsub(/\s+/,"")
+		#if (test_line =~ /<sk>cold%1:26:00::/)
+	#			puts line 	
+	#			puts "WTF?"
+	#	end
 
 		if (syn && words[0] == "<keys>")
+			#puts words[0]
 			nline = fp.readline
+			nline.gsub!(/\s+/, "")
+			puts nline
+			fir_spl = nline.split(">")
+			while (fir_spl[0] != "<sk")
+				nline = fp.readline
+				nline.gsub!(/\s+/, "")
+				fir_spl = nline.split(">")
+				#fir_spl[0].gsub!(/\s+/, "")
+			end
 			while (TRUE)
 				#adds to the keys for this entry
-				fir_spl = nline.split(">")
-				fir_spl[0].gsub!(/\s+/, "")
-				#pp fir_spl
+				#nline.gsub!(/\s+/,"")
+			#	if (nline =~ /<sk>cold/)
+		#			puts nline 	
+	#				puts "WTF?"
+	#			end
+				#fir_spl = nline.split(">")
+				#fir_spl[0].gsub!(/\s+/, "")
+								#pp fir_spl
 				if (fir_spl[0] == "<sk")
 					sec_spl = fir_spl[1].split(">")
 					thr_spl = sec_spl[0].split("<")
 					keys.push(thr_spl[0])
 					nline = fp.readline
+					nline.gsub!(/\s+/, "")
+					fir_spl = nline.split(">")
 				else
 					break
 				end
@@ -114,18 +143,6 @@ Dir.foreach(dir_name) do |file|
 
 			#puts "in wf"
 			if (defin && syn)
-				#look at tag to see what to do
-				#puts "words[4] is "
-				#puts words[4]
-=begin
-				start = -1
-				for i in (1 .. words.length -1)
-					if (i =~ /*>*/)
-						start = i
-						break
-					end
-				end
-=end
 				spl = words[words.length() -1].split(">")
 				#pp spl
 				case spl[0]
@@ -202,6 +219,11 @@ Dir.foreach(dir_name) do |file|
 					#need to format quot_spl, currently with |
 					#read the next line for id
 					nline = fp.readline
+					test_line = nline.split(">")
+					if (test_line[0] == "<sk")
+						puts nline
+					end
+
 					#puts nline
 					fir_split = nline.split(" ")
 					#puts "fir_splt"
@@ -241,6 +263,11 @@ Dir.foreach(dir_name) do |file|
 				#read until the id line
 				while (TRUE)
 					nline = fp.readline
+					test_line = nline.split(">")
+					if (test_line[0] == "<sk")
+						puts nline
+					end
+
 					spl = nline.split(" ")
 					#puts "nline is"
 					#puts nline
@@ -287,6 +314,7 @@ Dir.foreach(dir_name) do |file|
 				next
 			end
 		when "</def>"
+			#puts "changed"
 			defin = FALSE
 			next
 		#matches all the keys with the same glosses
@@ -295,7 +323,8 @@ Dir.foreach(dir_name) do |file|
 			#puts syn
 			if (syn == TRUE)
 				arr.push(gloss)
-				gloss_to_sensekey[gloss] = keys
+				gloss_stripped = gloss.gsub(/\s+/, "")
+				gloss_to_sensekey[gloss_stripped] = keys
 				keys.each do |key|
 					#puts "here"
 					#puts keys
@@ -322,8 +351,8 @@ end
 uf.close
 gloss_file = "./htable_gloss_to_sk"
 @htable = gloss_to_sensekey
-File.open(gloss_file, "w") {|file| Marshal.dump(@htable, file)}
-pp gloss_to_sensekey
+File.open(gloss_file, "w+") {|file| Marshal.dump(@htable, file)}
+#pp gloss_to_sensekey
 return h
 	
 end

@@ -25,12 +25,18 @@ class Dict
 
 
 def build_table
-
-dir_name = "/media/mynewdrive/story"
+tagger = Brill::Tagger.new 
+dir_name = "/media/mynewdrive/bio_tech"
 #dir_name = "./test"
 #h = Hash.new
 sf = File.open("htable_stop_words")
 pf = File.open("htable_punc_tag")
+
+name = "/media/mynewdrive/POS_tag_bio_tech"
+#pos_file = File.open("./corpus.txt", "r")
+pos_file = File.open(name, "w")
+#pos_file = File.open(name, "w")
+
 
 stop_word = Marshal.load(sf)
 punc = Marshal.load(pf)
@@ -73,7 +79,7 @@ fp.each do |line|
 
 	#puts "line is " + line
 	
-	tagger = Brill::Tagger.new 
+
 	tagged_words = tagger.tag(line)
 	if (tagged_words == [])
 		#puts "in here"
@@ -123,7 +129,7 @@ fp.each do |line|
 						tagged_words[i] = [test, "NOUN"]
 					end
 =end
-               puts tagged_words[i].first + " NOUN"
+               pos_file.puts tagged_words[i].first + " NOUN"
 				when "VB", "VBD", "VBG", "VBN", "VBP", "VBZ"
 =begin
 					IO.popen("python lemma.py", "r+") do |pipe|
@@ -136,15 +142,15 @@ fp.each do |line|
 						tagged_words[i] = [test, "VERB"]
 					end
 =end
-					puts tagged_words[i].first + " VERB"
+					pos_file.puts tagged_words[i].first + " VERB"
 				when "JJ", "JJR", "JJS"
 					#puts "adj"
 					#tagged_words[i] = [tagged_words[i].first, "ADJ"]
-					puts tagged_words[i].first + " ADJ"
+					pos_file.puts tagged_words[i].first + " ADJ"
 				when "RB", "RBR", "RBS"
 					#puts "adv"
 					#tagged_words[i] = [tagged_words[i].first, "ADV"]
-					puts tagged_words[i].first + " ADV"
+					pos_file.puts tagged_words[i].first + " ADV"
 				else
 					#puts "crap"
 					next
@@ -190,6 +196,6 @@ end
 if __FILE__ == $0
   d = Dict.new
   #pp d.htable
-  build_table
+  #build_table
 end
 

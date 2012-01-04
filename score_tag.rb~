@@ -17,18 +17,23 @@ class Dict
    end
 
 =end
+
+#d	
+
 def set_up
 
 fp = File.open("./untagged_list", "r");
 xml = File.open("./htable_xml", "r");
+gl_to_sk = File.open("./htable_gloss_to_sk", "r")
 
 lex = WordNet::Lexicon.new
 xml_htable = Marshal.load(xml)
+gloss_to_sk = Marshal.load(gl_to_sk)
 
 #data = fp.readlines;
 
 tagger = Brill::Tagger.new
-
+short = FALSE
 fp.each do |line|
 	next if line.nil?
 	word_with_stuff = line.split(" ")
@@ -37,9 +42,13 @@ fp.each do |line|
 	pos = ""
 	ignore = FALSE
 	term_regexp = ""
+	short = FALSE
 	if (word_with_stuff.length() == 2)
+		short = TRUE
+		#pp word_with_stuff
 		sk = word_with_stuff[1]
 		arr = xml_htable[sk]
+		#pp arr[arr.length()-1]
 		tagged = tagger.tag(arr[arr.length() - 1])
 		term_regexp = term + "*"
 		#puts term_regexp
@@ -59,21 +68,116 @@ fp.each do |line|
 					ignore = TRUE
 				end
 			end
-			#if (pos == "")
-			#	pos = "FUCKING A"
-			#end
-			#next if (pos == "")
 		end
 	else
 		pos = word_with_stuff[1]
+		#pp word_with_stuff
 		sk = word_with_stuff[2]
 	end
 	next if (pos == "" || ignore)
+
+	pos_short = ""
+	case pos 
+	when "noun"
+		pos_short = "n"
+	when "verb"
+		pos_short = "v"
+	when "adj"
+		pos_short = "a"
+	when "adv"
+		pos_short = "r"
+	end
+
+	#list of words
+	array = xml_htable[sk]
+	term_w_pos = term + pos
+	index = -1
+	for i in (0..array.length() -2)
+		#pp arr[i]
+		key_for_this_hash = array[i].keys[0].gsub(/\s+/, "")
+		if (short)		
+			if (key_for_this_hash == term)
+				index = i
+				break
+				#puts term
+				#puts "yay short"
+			end
+		else
+			if (key_for_this_hash == term_w_pos)
+				index = i
+				break
+				#puts term
+				#puts "yay long"
+			end
+		end
+	end
+	#now i have index of term, create 5 word window
+	front = index - 2
+	back = index + 2
+	front = 0 if (front < 0)
+	back = array.length() - 2 if (back > array.length() - 2 )
+
+	list_of_words = Hash.new
+	#puts "new"
+	#puts term
+	#puts sk
+	pp array
+	for i in (front..back)
+		should_be_sk = array[i].values[0]
+		next if (i == index || should_be_sk == "untagged_words")
+		#puts "should be keys"
+		#puts array[i].values[0]
+		curr_array = xml_htable[should_be_sk]
+
+
+		pp xml_htable["sep_11%1:28:00::"]
+		#should not happen....but it is for some reason
+		next if (curr_array.nil?)
+		for k in (0..curr_array.length() - 2)
+			word = curr_array[k]
+			#puts "word"
+			#pp word
+			proc_word = ""
+			if (word.values[0] == "untagged_words")
+				#pp word.keys[0].split(" ")
+				proc_word = word.keys[0].split(" ")[0]
+			else
+				proc_word = word.keys[0].split("%")[0]
+			end
+			list_of_words[proc_word].nil? ? list_of_words[proc_word] = 1 : list_of_words[proc_word] += 1
+		end
+		#puts "end of 1 word's gloss"
+	end
+
+	#puts term
+	#pp list_of_words
+	
+#get the possible glosses
+
+	gloss_mult = lex.lookup_synsets(term, pos_short)
+#	pp gloss_mult
+	#next if gloss_mult.nil?
+	cur_sk = Array.new
+	
+	#skip if this word does not have a sense with the given sense tag
+	next if (gloss_mult.nil?)
+	gloss_mult.each do |sense|
+		#lookup its sense key
+		pre_sense_gloss = sense.gloss.split(";")[0]
+
+		#getting all the sks for this current word that is of this n
+		sense_gloss = pre_sense_gloss.gsub(/\s+/,"")
+		cur_sk.push(gloss_to_sk[sense_gloss])
+	end
+	#should be all the sks that is this words
+	pp cur_sk
+
 	#puts "term"
-	puts term_regexp if (term_regexp !="")
+	#puts term_regexp if (term_regexp !="")
 	#puts "POS"
 	#puts pos
-	end
+	#end
+end
 end
 #end
 
